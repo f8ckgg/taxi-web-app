@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>StudyApp</title>
+  <link rel="stylesheet" href="app.component.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+</head>
+<body class="mat-typography yellow-theme">
+  <header>
+  </header>
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="toolbar-row">
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" (click)="updateLoggedInStatus()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item *ngIf="!isLoggedIn" routerLink="login">
+        <mat-icon>input</mat-icon>
+        <span>Login</span>
+      </a>
+      <a mat-menu-item *ngIf="isLoggedIn" routerLink="user">
+        <mat-icon>person</mat-icon>
+        <span>User</span>
+      </a>
+      <a mat-menu-item *ngIf="role === 'DRIVER'" routerLink="accept">
+        <mat-icon>assignment_turned_in</mat-icon>
+        <span>Accept an Order</span>
+      </a>
+      <a mat-menu-item *ngIf="role === 'DRIVER'" routerLink="finish">
+        <mat-icon>timer</mat-icon>
+        <span>Ride in Progress</span>
+      </a>
+      <a mat-menu-item *ngIf="role === 'DRIVER'" routerLink="roaddriver">
+        <mat-icon>history</mat-icon>
+        <span>Past Rides</span>
+      </a>
+      <a mat-menu-item *ngIf="role === 'DRIVER'" routerLink="cars">
+        <mat-icon>directions_car</mat-icon>
+        <span>Cars</span>
+      </a>
+      <a mat-menu-item *ngIf="role === 'DRIVER'" routerLink="averagerating">
+        <mat-icon>star</mat-icon>
+        <span>Rating</span>
+      </a>
+      <a mat-menu-item *ngIf="role === 'USER'"  routerLink="order">
+        <mat-icon>local_taxi</mat-icon>
+        <span>Order a Taxi</span>
+      </a>
+      <a mat-menu-item *ngIf="role === 'USER'" routerLink="roaduser">
+        <mat-icon>directions_car</mat-icon>
+        <span>Ride</span>
+      </a>
+      <a mat-menu-item *ngIf="role === 'USER'" routerLink="bills">
+        <mat-icon>receipt</mat-icon>
+        <span>Bills</span>
+      </a>
+      <button mat-menu-item *ngIf="isLoggedIn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+    <span class="logo"><i class="fa fa-taxi"></i>  <span class="logo-text">Такси</span> </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<main>
+</main>
+<router-outlet></router-outlet>
+<footer>
+  <p>&nbsp;</p>
+</footer>
+</body>
+</html>
+

@@ -1,0 +1,30 @@
+<form [formGroup]="registerForm" class="register-form">
+  <div class="form-content">
+    <mat-form-field appearance="fill" class="form-field">
+      <input matInput type="text" formControlName="name" placeholder="Name" />
+      <mat-error *ngIf="registerForm.get('name')?.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field">
+      <input matInput type="email" formControlName="email" placeholder="Email" />
+      <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Email is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field">
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Password" />
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Password is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Account Type</mat-label>
+      <mat-select formControlName="driver">
+        <mat-option value="false">Client</mat-option>
+        <mat-option value="true">Driver</mat-option>
+      </mat-select>
+      <mat-error *ngIf="registerForm.get('driver')?.hasError('required')">Account type is required</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="submit-button" type="button" [disabled]="registerForm.invalid" (click)="register()">Register</button>
+  </div>
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+</form>
+

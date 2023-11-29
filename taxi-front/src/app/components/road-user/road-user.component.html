@@ -1,0 +1,22 @@
+<div *ngIf="pendingRoads$ | async as pendingRoads">
+  <div *ngIf="pendingRoads.length > 0; else noRoads">
+    <div *ngFor="let road of pendingRoads">
+      <mat-card>
+        <mat-card-content>
+          <div>Start Location: {{ road.startLocation }}</div>
+          <div>End Location: {{ road.endLocation }}</div>
+          <div>Accepted: {{ road.accepted ? 'Yes' : 'No' }}</div>
+          <div *ngIf="road.accepted">
+            Driver: {{ road.driver.name }} - Car:  {{ road.car.model }} {{ road.car.licensePlate }}
+          </div>
+        </mat-card-content>
+        <mat-card-actions *ngIf="canDelete(road)">
+          <button mat-button color="warn" class="submit-button" (click)="deleteRoad(road.id)">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <ng-template #noRoads>
+    <div>No roads</div>
+  </ng-template>
+</div>

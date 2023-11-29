@@ -1,0 +1,26 @@
+<div class="container">
+  <div *ngIf="inProgressRoads$ | async as inProgressRoads">
+    <div *ngIf="inProgressRoads.length > 0; else noRoads">
+      <div *ngFor="let road of inProgressRoads">
+        <mat-card>
+          <mat-card-content>
+            <div>Start Location: {{ road.startLocation }}</div>
+            <div>End Location: {{ road.endLocation }}</div>
+            <div>
+              Client: {{ road.user.name }}
+            </div>
+            <div>
+              Car: {{ road.car.model }} {{ road.car.licensePlate }}
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="primary" class="submit-button" (click)="finishRoad(road.id)">Finish</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <ng-template #noRoads>
+      <div>No in-progress roads</div>
+    </ng-template>
+  </div>
+</div>

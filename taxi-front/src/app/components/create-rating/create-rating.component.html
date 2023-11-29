@@ -1,0 +1,15 @@
+<form [formGroup]="ratingForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Rating</mat-label>
+    <input matInput formControlName="value" type="number" min="1" max="5">
+    <mat-error *ngIf="ratingForm.get('value')?.hasError">Rating is required. From 1 to 5.</mat-error>
+
+  </mat-form-field>
+
+  <mat-form-field appearance="outline"  style="display: block">
+    <mat-label>Comment</mat-label>
+    <textarea matInput formControlName="comment" rows="5"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" class="submit-button" [disabled]="!ratingForm.valid">Submit</button>
+</form>
